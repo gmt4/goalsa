@@ -43,6 +43,7 @@ const (
 	FormatFloatBE   = C.SND_PCM_FORMAT_FLOAT_BE
 	FormatFloat64LE = C.SND_PCM_FORMAT_FLOAT64_LE
 	FormatFloat64BE = C.SND_PCM_FORMAT_FLOAT64_BE
+	FormatLast      = C.SND_PCM_FORMAT_LAST
 )
 
 var (

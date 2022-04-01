@@ -165,28 +165,23 @@ func TestPlayback(t *testing.T) {
 	p.Close()
 }
 
-/*
 func TestPanics(t *testing.T) {
-	//a := assert.New(t)
+	a := assert.New(t)
 
-	// Capture with Format Unknown must panic()
-	shouldPanic(t, func() {
-		NewCaptureDevice("null", 1, Format(-1), 44100, BufferParams{})
-	})
+	// Capture with Format Unknown
+	NewCaptureDevice("null", 1, FormatLast+1, 44100, BufferParams{})
+
+	// Playback with Format Unknown
+	NewPlaybackDevice("null", 1, FormatLast+1, 44100, BufferParams{})
 
 	// Capture reading with Unknown format must panic()
 	shouldPanic(t, func() {
 		c, err0 := NewCaptureDevice("null", 1, FormatS8, 44100, BufferParams{})
-		a.NoError(err0, "created playback device")
+		a.NoError(err0, "created capture device")
 
-		c.Format = Format(-1)
+		c.Format = FormatLast
 		b1 := make([]int8, 100)
 		c.Read(b1)
-	})
-
-	// Playback with Format Unknown must panic()
-	shouldPanic(t, func() {
-		NewPlaybackDevice("null", 1, Format(-1), 44100, BufferParams{})
 	})
 
 	// Plaback writing with Unknown format must panic()
@@ -194,15 +189,14 @@ func TestPanics(t *testing.T) {
 		p, err0 := NewPlaybackDevice("null", 1, FormatS8, 44100, BufferParams{})
 		a.NoError(err0, "created playback device")
 
-		p.Format = Format(-1)
+		p.Format = FormatLast
 		b1 := make([]int8, 100)
 		p.Write(b1)
 	})
 }
-*/
 
 func shouldPanic(t *testing.T, f func()) {
-    defer func() { recover() }()
-    f()
-    t.Errorf("should have panicked")
+	defer func() { recover() }()
+	f()
+	t.Errorf("should have panicked")
 }
